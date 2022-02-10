@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-bar{
+    background-image: linear-gradient(blue,pink);
+}
+.nav-link{
+    color: white !important;
+    font-weight: 500;
+    font-size: 20px;
+    cursor: pointer;
+}
+.nav-link:hover{
+    color: red !important;
+    border-bottom: 1px solid white;
+    transition: all .5s ease;
+}
