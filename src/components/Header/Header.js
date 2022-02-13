@@ -29,7 +29,7 @@ export default class Header extends Component {
                 <Collapse isOpen={this.state.isNavOpen} navbar>
                 <Nav className='ml-auto' navbar>
                     <NavItem>
-                        <NavLink className='nav-link'>Burger</NavLink>
+                        <NavLink className='nav-link'>Burger-Builder</NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink className='nav-link'>LogIn</NavLink>

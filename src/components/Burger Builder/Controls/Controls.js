@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card,CardBody,CardHeader,CardFooter } from 'reactstrap';
+import { Card,CardBody,CardHeader,CardFooter,Button } from 'reactstrap';
 
 const control=[
     {label:'Cheese',type:'Cheese'},
@@ -53,6 +53,7 @@ export default function Controls(props) {
                 }}>
                     <h5>Price: <strong>{props.totalPrice}</strong> BDT</h5>
                 </CardFooter>
+                <Button disabled={!props.purchaseAble} onClick={props.toggleModal}>Order Now</Button>
             </Card>
         </div>
   );
