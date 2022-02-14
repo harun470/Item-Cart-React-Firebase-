@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Navbar,NavbarBrand,Nav,NavItem,NavLink,NavbarToggler,Collapse} from 'reactstrap'
+import {Navbar,NavbarBrand,Nav,NavItem,NavbarToggler,Collapse} from 'reactstrap'
+import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/burger.png'
 import './Header.css'
 
@@ -29,14 +30,12 @@ export default class Header extends Component {
                 <Collapse isOpen={this.state.isNavOpen} navbar>
                 <Nav className='ml-auto' navbar>
                     <NavItem>
-                        <NavLink className='nav-link'>Burger-Builder</NavLink>
+                        <NavLink to='/' className='nav-link'>Burger-Builder</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink className='nav-link'>LogIn</NavLink>
+                        <NavLink to='/Order' className='nav-link'>Order</NavLink>
                     </NavItem>
-                    <NavItem>
-                        <NavLink className='nav-link'>LogOut</NavLink>
-                    </NavItem>
+                    
                 </Nav>
                 </Collapse>
                 </div>

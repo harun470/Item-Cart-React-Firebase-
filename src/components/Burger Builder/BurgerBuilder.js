@@ -42,6 +42,10 @@ export default class BurgerBuilder extends Component {
       })
     }
 
+    checkOut=()=>{
+      this.props.history.push('/checkOut')
+    }
+
     addIngrident=(type)=>{
       let ingredients=[...this.state.ingredients]
       let newPrice=this.state.totalPrice+INGREDIENT_PRICE[type]
@@ -91,7 +95,7 @@ export default class BurgerBuilder extends Component {
                   <Summary ingredients={this.state.ingredients} />
               </ModalBody>
               <ModalFooter>
-                <Button className='btn-success'>Continue to checkout</Button>
+                <Button className='btn-success' onClick={this.checkOut}>Continue to checkout</Button>
                 <Button className='btn-secondary' onClick={this.toggleModal}>Cancel</Button>
               </ModalFooter>
             </Modal>
