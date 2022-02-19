@@ -3,37 +3,33 @@ import Burger from './Burger/Burger';
 import Controls from './Controls/Controls'
 import { Button, Modal,ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import Summary from './Summary/Summary';
+import { connect } from 'react-redux';
+import { addIngredient,removeIngredient,updatePurchaseAble } from '../../redux/actionCreators';
 
-const INGREDIENT_PRICE={
-  Cheese:50,
-  Meat:80,
-  Salad:20
+const mapStateToProps=(state)=>{
+  return{
+    ingredients:state.ingredients,
+    totalPrice:state.totalPrice,
+    purchaseAble:state.purchaseAble
+  }
 }
 
-export default class BurgerBuilder extends Component {
+const mapDispatchToProps=(dispatch)=>{
+  return{
+    addIngredient:(igType)=>dispatch(addIngredient(igType)),
+    removeIngredient:(igType)=>dispatch(removeIngredient(igType)),
+    updatePurchaseAble:()=>dispatch(updatePurchaseAble())
+  }
+}
+
+ class BurgerBuilder extends Component {
     constructor(props) {
       super(props)
     
       this.state = {
-         ingredients:[
-            {type:'Cheese', amount:0},
-            {type:'Meat', amount:0},
-            {type:'Salad', amount:0},
-
-         ],
-         totalPrice:80,
          modalOpen:false,
-         purchaseAble:false
+        
       }
-    }
-
-    updatePurchaseAble=(ingredients)=>{
-      const sum=ingredients.reduce((sum,element)=>{
-          return sum+element.amount
-      },0)
-      this.setState({
-        purchaseAble: sum>0
-      })
     }
 
     toggleModal=()=>{
@@ -46,53 +42,30 @@ export default class BurgerBuilder extends Component {
       this.props.history.push('/checkOut')
     }
 
-    addIngrident=(type)=>{
-      let ingredients=[...this.state.ingredients]
-      let newPrice=this.state.totalPrice+INGREDIENT_PRICE[type]
-      for(let item of ingredients){
-        if(item.type===type){
-          item.amount++
-        }
-      }
-      this.setState({
-        ingredients:ingredients,
-        totalPrice:newPrice
-      })
-      this.updatePurchaseAble(ingredients)
+    addIngridentHandle=(type)=>{
+      this.props.addIngredient(type)
+      this.props.updatePurchaseAble()
     }
 
-    removeIngrident=(type)=>{
-      let ingredients=[...this.state.ingredients]
-      let newPrice=this.state.totalPrice-INGREDIENT_PRICE[type]
-      for(let item of ingredients){
-        if(item.type===type){
-          if(item.amount<=0){
-            return;
-          }
-          item.amount--
-        }
-      }
-      this.setState({
-        ingredients:ingredients,
-        totalPrice:newPrice
-      })
-      this.updatePurchaseAble(ingredients)
+    removeIngridentHandle=(type)=>{
+      this.props.removeIngredient(type)
+      this.props.updatePurchaseAble()
     }
     
   render() {
     return (
         <div>
             <div className='d-flex flex-md-row flex-column'>
-                <Burger ingredients={this.state.ingredients} />
-                <Controls added={this.addIngrident} remove={this.removeIngrident}
-                totalPrice={this.state.totalPrice} toggleModal={this.toggleModal}
-                 purchaseAble={this.state.purchaseAble}/>
+                <Burger ingredients={this.props.ingredients} />
+                <Controls added={this.addIngridentHandle} remove={this.removeIngridentHandle}
+                totalPrice={this.props.totalPrice} toggleModal={this.toggleModal}
+                 purchaseAble={this.props.purchaseAble}/>
             </div>
             <Modal isOpen={this.state.modalOpen}>
               <ModalHeader>Order Summary</ModalHeader>
               <ModalBody>
-                  <h5>Total Price: {this.state.totalPrice}</h5>
-                  <Summary ingredients={this.state.ingredients} />
+                  <h5>Total Price: {this.props.totalPrice}</h5>
+                  <Summary ingredients={this.props.ingredients} />
               </ModalBody>
               <ModalFooter>
                 <Button className='btn-success' onClick={this.checkOut}>Continue to checkout</Button>
@@ -104,3 +77,5 @@ export default class BurgerBuilder extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps,mapDispatchToProps) (BurgerBuilder)
