@@ -104,7 +104,7 @@ const mapStateToProps=(state)=>{
                                 <br/>
                                 <input 
                                     name='password'
-                                    placeholder='Enter ur mobile number'
+                                    placeholder='Enter ur password'
                                     className='form-control'
                                     value={values.password}
                                     onChange={handleChange}
@@ -114,7 +114,7 @@ const mapStateToProps=(state)=>{
                                  {this.state.mode ==='Sign up'? <div>
                                  <input 
                                     name='passwordConfirm'
-                                    placeholder='Enter ur mobile number'
+                                    placeholder='Enter ur password'
                                     className='form-control'
                                     value={values.passwordConfirm}
                                     onChange={handleChange}
