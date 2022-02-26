@@ -53,7 +53,7 @@ export default function Controls(props) {
                 }}>
                     <h5>Price: <strong>{props.totalPrice}</strong> BDT</h5>
                 </CardFooter>
-                <Button disabled={!props.purchaseAble} onClick={props.toggleModal}>Order Now</Button>
+                <Button color='success' disabled={!props.purchaseAble} onClick={props.toggleModal}>Order Now</Button>
             </Card>
         </div>
   );

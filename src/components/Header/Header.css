@@ -9,12 +9,12 @@
 }
 .nav-link{
     color: white !important;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 20px;
     cursor: pointer;
 }
 .nav-link:hover{
-    color: red !important;
+    color: wheat !important;
     border-bottom: 1px solid white;
     transition: all .5s ease;
 }
